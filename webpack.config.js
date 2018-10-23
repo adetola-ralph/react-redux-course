@@ -1,5 +1,11 @@
 const webpack = require('webpack');
 const path = require('path');
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+
+const htmlPlugin = new HtmlWebPackPlugin({
+  template: "./src/index.html",
+  filename: "./index.html"
+});
 
 module.exports = {
   mode: 'development',
@@ -52,5 +58,6 @@ module.exports = {
     new webpack.LoaderOptionsPlugin({
       debug: true,
     }),
+    htmlPlugin,
   ],
 };
