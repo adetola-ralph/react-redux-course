@@ -1,22 +1,22 @@
-import webpack from 'webpack';
-import path from 'path';
+const webpack = require('webpack');
+const path = require('path');
 
-export default {
-  entry: './src/index.js',
+module.exports = {
+  mode: 'development',
+  entry: path.join(__dirname, 'src/index.js'),
   devtool: 'inline-source-map',
-  debug: true,
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',
     filename: 'bundle.js',
   },
   target: 'web',
-  modules: {
+  module: {
     rules: [
       {
         test: /\.jsx$/,
         include: path.join(__dirname, 'src'),
-        exlude: /node_modules/,
+        exclude: /node_modules/,
         loaders: ['babel', 'eslint'],
       },
       {
@@ -48,6 +48,9 @@ export default {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.LoaderOptionsPlugin({
+      debug: true,
+    }),
   ],
 };
