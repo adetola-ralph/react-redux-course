@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const htmlPlugin = new HtmlWebPackPlugin({
   template: "./src/index.html",
@@ -51,12 +52,14 @@ module.exports = {
     contentBase: path.resolve(__dirname, 'src'),
     hot: true,
     open: true,
+    noInfo: true,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
+    // new webpack.NoEmitOnErrorsPlugin(),
+    new CleanWebpackPlugin(['dist']),
     new webpack.LoaderOptionsPlugin({
-      debug: true,
+      // debug: true,
     }),
     htmlPlugin,
   ],
