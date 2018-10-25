@@ -52,6 +52,7 @@ module.exports = {
     contentBase: path.resolve(__dirname, 'src'),
     hot: true,
     open: true,
+    historyApiFallback: true,
     // noInfo: true,
   },
   plugins: [

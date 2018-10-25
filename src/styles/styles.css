@@ -1,7 +1,6 @@
 * {
   padding: 0;
   margin: 0;
-  border: 0;
 }
 
 #app {
@@ -12,7 +11,7 @@
   margin: 0 auto;
 }
 
-a.active {
+a:active {
   color: orange;
 }
 
