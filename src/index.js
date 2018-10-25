@@ -1,11 +1,25 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 
 // App component
 import App from './components/App';
 
-// Styles
-import './styles/styles.css';
-import '~/bootstrap/dist/css/bootstrap.css';
+// Store
+import configureStore from './store/configureStore';
 
-render(<App />, document.querySelector('#app'));
+// Actions
+import { loadCourses } from './actions/courseActions';
+
+// Styles
+import '~/bootstrap/dist/css/bootstrap.css';
+import './styles/styles.css';
+
+const store = configureStore();
+store.dispatch(loadCourses());
+
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>, document.querySelector('#app'),
+);
