@@ -1,11 +1,13 @@
-import { CREATE_COURSE, DELETE_COURSE } from './actionTypes';
+import { LOAD_COURSES_SUCCESS } from './actionTypes';
+import courseApi from '../api/mockCourseApi';
 
-export const createCourse = course => ({
-  type: CREATE_COURSE,
-  course,
+export const loadCoursesSuccess = courses => ({
+  type: LOAD_COURSES_SUCCESS,
+  courses,
 });
 
-export const deleteCourse = course => ({
-  type: DELETE_COURSE,
-  course,
+export const loadCourses = () => dispatch => courseApi.getAllCourses().then((courses) => {
+  dispatch(loadCoursesSuccess(courses));
+}).catch((error) => {
+  throw (error);
 });
