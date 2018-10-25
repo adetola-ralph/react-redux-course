@@ -1,49 +1,32 @@
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+// Components
+import CourseList from './CourseList';
 
 class CoursesPage extends Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      course: {
-        title: '',
-      },
-    };
-
-    this.onTitleChange = this.onTitleChange.bind(this);
-    this.onClickSave = this.onClickSave.bind(this);
-  }
-
-  onTitleChange(event) {
-    let { course } = this.state;
-    const title = event.target.value;
-    course = { ...course, title };
-
-    this.setState({
-      course,
-    });
-  }
-
-  onClickSave(event) {
-    event.preventDefault();
-    const { course } = this.state;
-    const { title } = course;
-    alert(`Saving ${title}`);
-  }
-
   render() {
-    const { course } = this.state;
+    const { courses } = this.props;
     return (
       <div>
         <h1>Courses</h1>
-        <h2>Add Course</h2>
-        <form onSubmit={this.onClickSave}>
-          <input type="text" onChange={this.onTitleChange} value={course.title} />
-          <input type="submit" value="save" />
-        </form>
+        <CourseList courses={courses} />
       </div>
     );
   }
 }
 
-export default CoursesPage;
+CoursesPage.propTypes = {
+  courses: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
+
+const mapStateToProps = state => ({
+  courses: state.courses,
+});
+
+export default connect(mapStateToProps)(CoursesPage);
