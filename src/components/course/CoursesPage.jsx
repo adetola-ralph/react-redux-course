@@ -1,21 +1,23 @@
 import { connect } from 'react-redux';
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // Components
 import CourseList from './CourseList';
 
-class CoursesPage extends Component {
-  render() {
-    const { courses } = this.props;
-    return (
-      <div>
-        <h1>Courses</h1>
-        <CourseList courses={courses} />
-      </div>
-    );
-  }
-}
+const CoursesPage = ({ courses, history }) => {
+  const redirectToCourseAddPage = () => {
+    history.push('/course');
+  };
+
+  return (
+    <div>
+      <h1>Courses</h1>
+      <button className="btn btn-primary" type="button" onClick={redirectToCourseAddPage}>Add Course</button>
+      <CourseList courses={courses} />
+    </div>
+  );
+};
 
 CoursesPage.propTypes = {
   courses: PropTypes.arrayOf(
@@ -23,6 +25,7 @@ CoursesPage.propTypes = {
       title: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 const mapStateToProps = state => ({
