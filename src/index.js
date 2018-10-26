@@ -10,6 +10,7 @@ import configureStore from './store/configureStore';
 
 // Actions
 import { loadCourses } from './actions/courseActions';
+import { loadAuthor } from './actions/authorActions';
 
 // Styles
 import '~/bootstrap/dist/css/bootstrap.css';
@@ -17,6 +18,7 @@ import './styles/styles.css';
 
 const store = configureStore();
 store.dispatch(loadCourses());
+store.dispatch(loadAuthor());
 
 render(
   <Provider store={store}>
