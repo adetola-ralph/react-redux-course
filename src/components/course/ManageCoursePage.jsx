@@ -22,22 +22,33 @@ class ManageCoursePage extends Component {
     this.saveCourse = this.saveCourse.bind(this);
   }
 
+  static getDerivedStateFromProps(props, state) {
+    if (props.course.id !== state.course.id) {
+      return { course: props.course };
+    }
+
+    return null;
+  }
+
   updateCourseState(event) {
+    // debugger;
     const field = event.target.name;
     let { course } = this.state;
+    // debugger;
     course = { ...course, [field]: event.target.value };
     return this.setState({ course });
   }
 
   saveCourse(event) {
     event.preventDefault();
-    const { actions } = this.props;
+    const { actions, history } = this.props;
     const { course } = this.state;
     actions.saveCourse(course);
+    history.push('/courses');
   }
 
   render() {
-    const { course, errors } = this.state;
+    const { errors, course } = this.state;
     const { allAuthors } = this.props;
     const { updateCourseState, saveCourse } = this;
 
@@ -66,6 +77,7 @@ ManageCoursePage.propTypes = {
     text: PropTypes.string,
   })).isRequired,
   actions: PropTypes.objectOf(PropTypes.func).isRequired,
+  history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 ManageCoursePage.defaultProps = {
@@ -78,13 +90,22 @@ const mapDispatchToProps = dispatch => ({
   // saveCourse: course => dispatch(courseActions.saveCourse(course)),
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  const courseId = ownProps.match.params.id;
+  let course = {
+    id: '', watchHref: '', title: '', authorId: '', length: '', category: '',
+  };
+
+  if (courseId) {
+    course = state.courses.find(_course => _course.id === courseId);
+  }
+
   const authorsFormattedForDropdown = state.authors.map(author => ({
     value: author.id,
     text: `${author.firstName} ${author.lastName}`,
   }));
 
-  return { course: state.course, allAuthors: authorsFormattedForDropdown };
+  return { course, allAuthors: authorsFormattedForDropdown };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageCoursePage);
