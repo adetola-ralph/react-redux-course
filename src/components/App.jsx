@@ -6,6 +6,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import Home from './home/HomePage';
 import About from './about/AboutPage';
 import Courses from './course/CoursesPage';
+import ManageCourse from './course/ManageCoursePage';
 
 import Header from './common/Header';
 
@@ -18,6 +19,7 @@ const App = () => (
       <Route exact path="/" component={Home} />
       <Route exact path="/about" component={About} />
       <Route exact path="/courses" component={Courses} />
+      <Route exact path="/course/:id?" component={ManageCourse} />
     </div>
   </Router>
 );
