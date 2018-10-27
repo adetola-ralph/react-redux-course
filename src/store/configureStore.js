@@ -9,7 +9,7 @@ import rootReducer from '../reducers';
 const configureStore = initialState => createStore(
   rootReducer,
   initialState,
-  applyMiddleware(reduxImmutableStateInvariant(), logger, thunk),
+  applyMiddleware(thunk, reduxImmutableStateInvariant(), logger),
 );
 
 export default configureStore;

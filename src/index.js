@@ -14,6 +14,7 @@ import { loadAuthor } from './actions/authorActions';
 
 // Styles
 import '~/bootstrap/dist/css/bootstrap.css';
+import '~/toastr/build/toastr.min.css';
 import './styles/styles.css';
 
 const store = configureStore();
