@@ -1,6 +1,8 @@
 import React from 'react';
 import { Router, Route } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Components
 import Home from './home/HomePage';
@@ -12,10 +14,10 @@ import Header from './common/Header';
 
 const customHistory = createBrowserHistory();
 
-const App = () => (
+const App = ({ loading }) => (
   <Router history={customHistory}>
     <div className="container-fluid">
-      <Header />
+      <Header loading={loading} />
       <Route exact path="/" component={Home} />
       <Route exact path="/about" component={About} />
       <Route exact path="/courses" component={Courses} />
@@ -24,4 +26,12 @@ const App = () => (
   </Router>
 );
 
-export default App;
+App.propTypes = {
+  loading: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = state => ({
+  loading: state.ajaxCallsInProgress > 0,
+});
+
+export default connect(mapStateToProps)(App);
