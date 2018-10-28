@@ -6,10 +6,23 @@ import thunk from 'redux-thunk';
 // Reducers
 import rootReducer from '../reducers';
 
+const middlewares = () => {
+  const middleware = [
+    thunk,
+    logger,
+  ];
+
+  if (process.env.NODE_ENV !== 'production') {
+    middleware.push(reduxImmutableStateInvariant());
+  }
+
+  return middleware;
+};
+
 const configureStore = initialState => createStore(
   rootReducer,
   initialState,
-  applyMiddleware(thunk, reduxImmutableStateInvariant(), logger),
+  applyMiddleware(...middlewares()),
 );
 
 export default configureStore;
