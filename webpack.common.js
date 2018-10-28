@@ -1,5 +1,20 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const devMode = process.env.NODE_ENV !== 'production';
+
+const htmlPlugin = new HtmlWebPackPlugin({
+  template: './src/index.html',
+  filename: './index.html',
+  title: 'React and Redux Application on Pluralsight',
+});
+
+const miniCssPlugin = new MiniCssExtractPlugin({
+  filename: "[name].css",
+  chunkFilename: "[id].css"
+});
 
 module.exports = {
   entry: path.join(__dirname, 'src/index.js'),
@@ -15,17 +30,21 @@ module.exports = {
     },
     extensions: ['.js', '.jsx'],
   },
+  plugins: [
+    htmlPlugin,
+    miniCssPlugin,
+  ],
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         include: path.join(__dirname, 'src'),
         exclude: /node_modules/,
-        loaders: ['babel-loader', 'eslint-loader'],
+        loaders: ['babel-loader'],
       },
       {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
+        loaders: [devMode ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
