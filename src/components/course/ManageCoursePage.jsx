@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import toastr from 'toastr';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import toastr from 'toastr';
 
 // Components
 import CourseForm from './CourseForm';
