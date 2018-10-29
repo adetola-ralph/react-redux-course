@@ -7,9 +7,10 @@ import PropTypes from 'prop-types';
 // Components
 import Home from './home/HomePage';
 import About from './about/AboutPage';
-import Courses from './course/CoursesPage';
-import ManageCourse from './course/ManageCoursePage';
 import Authors from './author/AuthorPage';
+import Courses from './course/CoursesPage';
+import ManageAuthor from './author/ManageAuthor';
+import ManageCourse from './course/ManageCoursePage';
 
 import Header from './common/Header';
 
@@ -24,6 +25,7 @@ const App = ({ loading }) => (
       <Route exact path="/courses" component={Courses} />
       <Route exact path="/authors" component={Authors} />
       <Route exact path="/course/:id?" component={ManageCourse} />
+      <Route exact path="/author/:id?" component={ManageAuthor} />
     </div>
   </Router>
 );
