@@ -1,9 +1,11 @@
-import { connect } from 'react-redux';
 import React from 'react';
+import toastr from 'toastr';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 // Components
 import CourseList from './CourseList';
+import EmptyList from '../common/EmptyList';
 
 // Actions
 import { deleteCourse as deleteCourseAction } from '../../actions/courseActions';
@@ -13,13 +15,19 @@ const CoursesPage = ({ courses, history, deleteCourse }) => {
     history.push('/course');
   };
 
-  const deleteCourseMethod = course => deleteCourse(course);
+  const deleteCourseMethod = (course) => {
+    deleteCourse(course).then(() => toastr.success('Course deleted'));
+  };
 
   return (
     <div>
       <h1>Courses</h1>
       <button className="btn btn-primary" type="button" onClick={redirectToCourseAddPage}>Add Course</button>
-      <CourseList courses={courses} deleteCourse={deleteCourseMethod} />
+      {
+        courses.length > 0
+          ? <CourseList courses={courses} deleteCourse={deleteCourseMethod} />
+          : <EmptyList message="Nothing to see here, Add a new course" buttonAction={redirectToCourseAddPage} buttonMessage="Add a new Course" />
+      }
     </div>
   );
 };

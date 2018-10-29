@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import AuthorList from './AuthorList';
+import EmptyList from '../common/EmptyList';
 
 const AuthorsPage = ({ authors, history }) => {
   const redirectToAutorAddPage = () => {
@@ -14,7 +15,11 @@ const AuthorsPage = ({ authors, history }) => {
     <div>
       <h1>Authors</h1>
       <button className="btn btn-primary" type="button" onClick={redirectToAutorAddPage}>Add Author</button>
-      <AuthorList authors={authors} />
+      {
+        authors.length > 0
+          ? <AuthorList authors={authors} />
+          : <EmptyList message="Nothing to see here, Add a new author" buttonAction={redirectToAutorAddPage} buttonMessage="Add a new Author" />
+      }
     </div>
   );
 };
