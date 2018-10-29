@@ -1,4 +1,6 @@
-import { LOAD_COURSES_SUCCESS, CREATE_COURSE_SUCCESS, UPDATE_COURSE_SUCCESS } from '../actions/actionTypes';
+import {
+  LOAD_COURSES_SUCCESS, CREATE_COURSE_SUCCESS, UPDATE_COURSE_SUCCESS, DELETE_COURSE_SUCCESS,
+} from '../actions/actionTypes';
 
 const courseReducer = (state = [], action) => {
   const { type } = action;
@@ -15,6 +17,8 @@ const courseReducer = (state = [], action) => {
 
         return course;
       });
+    case DELETE_COURSE_SUCCESS:
+      return state.filter(course => course.id !== action.course.id);
     default:
       return state;
   }

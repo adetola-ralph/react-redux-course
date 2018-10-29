@@ -1,4 +1,6 @@
-import { LOAD_COURSES_SUCCESS, UPDATE_COURSE_SUCCESS, CREATE_COURSE_SUCCESS } from './actionTypes';
+import {
+  LOAD_COURSES_SUCCESS, UPDATE_COURSE_SUCCESS, CREATE_COURSE_SUCCESS, DELETE_COURSE_SUCCESS,
+} from './actionTypes';
 import courseApi from '../api/mockCourseApi';
 import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
 
@@ -14,6 +16,11 @@ export const updateCourseSuccess = course => ({
 
 export const createCourseSuccess = course => ({
   type: CREATE_COURSE_SUCCESS,
+  course,
+});
+
+export const deleteCourseSuccess = course => ({
+  type: DELETE_COURSE_SUCCESS,
   course,
 });
 
@@ -34,6 +41,16 @@ export const saveCourse = course => (dispatch) => {
     } else {
       dispatch(createCourseSuccess(savedCourse));
     }
+  }).catch((error) => {
+    dispatch(ajaxCallError());
+    throw error;
+  });
+};
+
+export const deleteCourse = course => (dispatch) => {
+  dispatch(beginAjaxCall());
+  return courseApi.deleteCourse(course.id).then(() => {
+    dispatch(deleteCourseSuccess(course));
   }).catch((error) => {
     dispatch(ajaxCallError());
     throw error;

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // Components
 import CourseListRow from './CourseListRow';
 
-const CourseList = ({ courses }) => (
+const CourseList = ({ courses, deleteCourse }) => (
   <table className="table">
     <thead>
       <tr>
@@ -13,10 +13,19 @@ const CourseList = ({ courses }) => (
         <th>Author</th>
         <th>Category</th>
         <th>Length</th>
+        <th />
       </tr>
     </thead>
     <tbody>
-      {courses.map(course => <CourseListRow key={course.id} course={course} />)}
+      {
+        courses.map(course => (
+          <CourseListRow
+            key={course.id}
+            course={course}
+            deleteCourse={deleteCourse}
+          />
+        ))
+      }
     </tbody>
   </table>
 );
@@ -32,6 +41,7 @@ CourseList.propTypes = {
       category: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  deleteCourse: PropTypes.func.isRequired,
 };
 
 export default CourseList;

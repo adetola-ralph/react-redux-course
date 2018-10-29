@@ -8,7 +8,7 @@
 ## Extra challenges
 React Redux challenges
 - [x]  Author administration
-- [ ]  Delete course
+- [x]  Delete course
 - [ ]  Hide empty course list
 - [ ]  Unsaved changes message
 - [ ]  Client side validation
