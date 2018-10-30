@@ -14,7 +14,7 @@ React Redux challenges
 - [ ]  Client side validation
 - [x]  Handle 404s
 - [ ]  Handle non existent authors and courses
-- [ ]  Number of courses in the header
+- [x]  Number of courses in the header
 - [ ]  Pagination or infinite scrolling
 - [ ]  Sorting the table automatically
 - [ ]  Revert abandoned changes

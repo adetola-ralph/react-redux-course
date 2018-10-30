@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import LoadingDots from './LoadingDots';
 
-const Header = ({ loading }) => (
+const Header = ({ loading, numberOfCourses }) => (
   <nav>
     <Link to="/">Home</Link>
     { '|' }
@@ -12,12 +12,22 @@ const Header = ({ loading }) => (
     <Link to="/courses">Courses</Link>
     { '|' }
     <Link to="/authors">Authors</Link>
-    {loading && <LoadingDots interval={100} dots={20} />}
+    { '|' }
+    <span>
+      Number of courses:&nbsp;
+      {numberOfCourses}
+    </span>
+    <span>{loading && <LoadingDots interval={100} dots={20} />}</span>
   </nav>
 );
 
 Header.propTypes = {
   loading: PropTypes.bool.isRequired,
+  numberOfCourses: PropTypes.number,
+};
+
+Header.defaultProps = {
+  numberOfCourses: 0,
 };
 
 export default Header;

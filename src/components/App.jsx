@@ -29,10 +29,10 @@ NotFoundComponent.propTypes = {
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-const App = ({ loading }) => (
+const App = ({ loading, numberOfCourses }) => (
   <Router history={customHistory}>
     <div className="container-fluid">
-      <Header loading={loading} />
+      <Header loading={loading} numberOfCourses={numberOfCourses} />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />
@@ -48,10 +48,16 @@ const App = ({ loading }) => (
 
 App.propTypes = {
   loading: PropTypes.bool.isRequired,
+  numberOfCourses: PropTypes.number,
+};
+
+App.defaultProps = {
+  numberOfCourses: 0,
 };
 
 const mapStateToProps = state => ({
   loading: state.ajaxCallsInProgress > 0,
+  numberOfCourses: state.courses.length,
 });
 
 export default connect(mapStateToProps)(App);
