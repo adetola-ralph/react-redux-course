@@ -1,7 +1,8 @@
 import toastr from 'toastr';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Prompt } from 'react-router';
+import React, { Component, Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 
 // Components
@@ -19,6 +20,7 @@ class ManageCoursePage extends Component {
       course: { ...course },
       errors: {},
       saving: false,
+      isModified: false,
     };
     this.updateCourseState = this.updateCourseState.bind(this);
     this.saveCourse = this.saveCourse.bind(this);
@@ -38,7 +40,7 @@ class ManageCoursePage extends Component {
     let { course } = this.state;
     // debugger;
     course = { ...course, [field]: event.target.value };
-    return this.setState({ course });
+    return this.setState({ course, isModified: true });
   }
 
   saveCourse(event) {
@@ -47,7 +49,7 @@ class ManageCoursePage extends Component {
     const { actions, history } = this.props;
     const { course } = this.state;
     actions.saveCourse(course).then(() => {
-      this.setState({ saving: false });
+      this.setState({ saving: false, isModified: false });
       toastr.success('Course saved');
       history.push('/courses');
     }).catch((error) => {
@@ -57,19 +59,27 @@ class ManageCoursePage extends Component {
   }
 
   render() {
-    const { errors, course, saving } = this.state;
+    const {
+      errors, course, saving, isModified,
+    } = this.state;
     const { allAuthors } = this.props;
     const { updateCourseState, saveCourse } = this;
 
     return (
-      <CourseForm
-        onChange={updateCourseState}
-        onSave={saveCourse}
-        allAuthors={allAuthors}
-        course={course}
-        errors={errors}
-        saving={saving}
-      />
+      <Fragment>
+        <Prompt
+          when={isModified}
+          message={() => 'You have unsaved changes, are you sure you want to leave?'}
+        />
+        <CourseForm
+          onChange={updateCourseState}
+          onSave={saveCourse}
+          allAuthors={allAuthors}
+          course={course}
+          errors={errors}
+          saving={saving}
+        />
+      </Fragment>
     );
   }
 }

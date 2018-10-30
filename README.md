@@ -10,7 +10,7 @@ React Redux challenges
 - [x]  Author administration
 - [x]  Delete course
 - [x]  Hide empty course list
-- [ ]  Unsaved changes message
+- [x]  Unsaved changes message
 - [ ]  Client side validation
 - [x]  Handle 404s
 - [ ]  Handle non existent authors and courses

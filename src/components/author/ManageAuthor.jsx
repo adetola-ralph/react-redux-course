@@ -1,7 +1,8 @@
 import toastr from 'toastr';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import React, { Component } from 'react';
+import { Prompt } from 'react-router';
+import React, { Component, Fragment } from 'react';
 
 // Actions
 import { saveAuthor as saveAuthorAction } from '../../actions/authorActions';
@@ -18,6 +19,7 @@ class ManageAuthor extends Component {
       author: { ...author },
       errors: {},
       saving: false,
+      isModified: false,
     };
 
     this.updateAuthorState = this.updateAuthorState.bind(this);
@@ -28,7 +30,7 @@ class ManageAuthor extends Component {
     const { name, value } = event.target;
     let { author } = this.state;
     author = { ...author, [name]: value };
-    return this.setState({ author });
+    return this.setState({ author, isModified: true });
   }
 
   saveAuthorMethod(event) {
@@ -48,17 +50,25 @@ class ManageAuthor extends Component {
   }
 
   render() {
-    const { saving, errors, author } = this.state;
+    const {
+      saving, errors, author, isModified,
+    } = this.state;
     const { updateAuthorState, saveAuthorMethod } = this;
 
     return (
-      <AuthorForm
-        onChange={updateAuthorState}
-        onSave={saveAuthorMethod}
-        author={author}
-        errors={errors}
-        saving={saving}
-      />
+      <Fragment>
+        <Prompt
+          when={isModified}
+          message={() => 'You have unsaved changes, are you sure you want to leave?'}
+        />
+        <AuthorForm
+          onChange={updateAuthorState}
+          onSave={saveAuthorMethod}
+          author={author}
+          errors={errors}
+          saving={saving}
+        />
+      </Fragment>
     );
   }
 }
