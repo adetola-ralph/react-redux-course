@@ -12,7 +12,8 @@ React Redux challenges
 - [x]  Hide empty course list
 - [ ]  Unsaved changes message
 - [ ]  Client side validation
-- [ ]  Handle 404s (manage course page)
+- [x]  Handle 404s
+- [ ]  Handle non existent authors and courses
 - [ ]  Number of courses in the header
 - [ ]  Pagination or infinite scrolling
 - [ ]  Sorting the table automatically
