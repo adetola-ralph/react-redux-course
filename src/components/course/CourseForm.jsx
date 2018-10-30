@@ -19,7 +19,7 @@ const CourseForm = ({
       label="Title"
       value={course.title}
       onChange={onChange}
-      error={errors.title}
+      errors={errors.title}
     />
 
     <SelectInput
@@ -29,7 +29,7 @@ const CourseForm = ({
       defaultValue="Select Author"
       options={allAuthors}
       onChange={onChange}
-      error={errors.authorId}
+      errors={errors.authorId}
     />
 
     <TextInput
@@ -37,7 +37,7 @@ const CourseForm = ({
       label="Category"
       value={course.category}
       onChange={onChange}
-      error={errors.category}
+      errors={errors.category}
     />
 
     <TextInput
@@ -45,7 +45,7 @@ const CourseForm = ({
       label="Length"
       value={course.length}
       onChange={onChange}
-      error={errors.length}
+      errors={errors.length}
     />
 
     <input type="submit" value={saving ? 'Saving...' : 'Save'} disabled={saving} className="btn btn-primary" />
@@ -68,10 +68,10 @@ CourseForm.propTypes = {
   onChange: PropTypes.func.isRequired,
   saving: PropTypes.bool,
   errors: PropTypes.shape({
-    title: PropTypes.string,
-    category: PropTypes.string,
-    length: PropTypes.string,
-    authorId: PropTypes.string,
+    title: PropTypes.arrayOf(PropTypes.string),
+    category: PropTypes.arrayOf(PropTypes.string),
+    length: PropTypes.arrayOf(PropTypes.string),
+    authorId: PropTypes.arrayOf(PropTypes.string),
   }),
 };
 

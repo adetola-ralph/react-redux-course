@@ -4,12 +4,43 @@ import { connect } from 'react-redux';
 import { Prompt } from 'react-router';
 import React, { Component, Fragment } from 'react';
 import { bindActionCreators } from 'redux';
+import { validate } from 'validate.js';
 
 // Components
 import CourseForm from './CourseForm';
 
 // Actions
 import * as courseActions from '../../actions/courseActions';
+
+const courseValidationCOnstraint = {
+  title: {
+    presence: {
+      allowEmpty: false,
+    },
+    length: {
+      minimum: 5,
+    },
+  },
+  authorId: {
+    presence: {
+      allowEmpty: false,
+    },
+  },
+  length: {
+    presence: {
+      allowEmpty: false,
+    },
+    format: {
+      pattern: /\d{1,2}:\d{2}/,
+      message: 'Invalid value for length, length must be in the format ##:## with # being a digit',
+    },
+  },
+  category: {
+    presence: {
+      allowEmpty: false,
+    },
+  },
+};
 
 class ManageCoursePage extends Component {
   constructor(props) {
@@ -35,19 +66,30 @@ class ManageCoursePage extends Component {
   }
 
   updateCourseState(event) {
-    // debugger;
     const field = event.target.name;
-    let { course } = this.state;
-    // debugger;
+    let { course, errors } = this.state;
     course = { ...course, [field]: event.target.value };
-    return this.setState({ course, isModified: true });
+    errors = { ...errors, [field]: [] };
+    return this.setState({ course, isModified: true, errors });
   }
 
   saveCourse(event) {
     event.preventDefault();
-    this.setState({ saving: true });
     const { actions, history } = this.props;
     const { course } = this.state;
+    const validators = validate(course, courseValidationCOnstraint);
+    if (validators) {
+      const keys = Object.keys(validators);
+      const errors = {};
+      for (const key of keys) { // eslint-disable-line
+        errors[key] = validators[key];
+      }
+      this.setState({
+        errors,
+      });
+      return;
+    }
+    this.setState({ saving: true });
     actions.saveCourse(course).then(() => {
       this.setState({ saving: false, isModified: false });
       toastr.success('Course saved');
