@@ -11,7 +11,7 @@ React Redux challenges
 - [x]  Delete course
 - [x]  Hide empty course list
 - [x]  Unsaved changes message
-- [ ]  Client side validation
+- [x]  Client side validation
 - [x]  Handle 404s
 - [ ]  Handle non existent authors and courses
 - [x]  Number of courses in the header

@@ -2,9 +2,9 @@ import toastr from 'toastr';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Prompt } from 'react-router';
+import { validate } from 'validate.js';
 import React, { Component, Fragment } from 'react';
 import { bindActionCreators } from 'redux';
-import { validate } from 'validate.js';
 
 // Components
 import CourseForm from './CourseForm';
@@ -12,7 +12,7 @@ import CourseForm from './CourseForm';
 // Actions
 import * as courseActions from '../../actions/courseActions';
 
-const courseValidationCOnstraint = {
+const courseValidationConstraint = {
   title: {
     presence: {
       allowEmpty: false,
@@ -77,7 +77,7 @@ class ManageCoursePage extends Component {
     event.preventDefault();
     const { actions, history } = this.props;
     const { course } = this.state;
-    const validators = validate(course, courseValidationCOnstraint);
+    const validators = validate(course, courseValidationConstraint);
     if (validators) {
       const keys = Object.keys(validators);
       const errors = {};

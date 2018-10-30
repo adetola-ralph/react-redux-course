@@ -14,7 +14,7 @@ const AuthorForm = ({
       label="First Name"
       value={author.firstName}
       onChange={onChange}
-      error={errors.firstname}
+      errors={errors.firstName}
     />
 
     <TextInput
@@ -22,7 +22,7 @@ const AuthorForm = ({
       label="Last Name"
       value={author.lastName}
       onChange={onChange}
-      error={errors.lastname}
+      errors={errors.lastName}
     />
 
     <input type="submit" value={saving ? 'Saving...' : 'Save'} disabled={saving} className="btn btn-primary" />
@@ -39,8 +39,8 @@ AuthorForm.propTypes = {
   onChange: PropTypes.func.isRequired,
   saving: PropTypes.bool,
   errors: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
+    firstName: PropTypes.arrayOf(PropTypes.string),
+    lastName: PropTypes.arrayOf(PropTypes.string),
   }),
 };
 

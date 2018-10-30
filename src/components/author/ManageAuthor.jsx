@@ -2,6 +2,7 @@ import toastr from 'toastr';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Prompt } from 'react-router';
+import { validate } from 'validate.js';
 import React, { Component, Fragment } from 'react';
 
 // Actions
@@ -9,6 +10,25 @@ import { saveAuthor as saveAuthorAction } from '../../actions/authorActions';
 
 // Components
 import AuthorForm from './AuthorForm';
+
+const authorValidationConstraint = {
+  firstName: {
+    presence: {
+      allowEmpty: false,
+    },
+    length: {
+      minimum: 3,
+    },
+  },
+  lastName: {
+    presence: {
+      allowEmpty: false,
+    },
+    length: {
+      minimum: 3,
+    },
+  },
+};
 
 class ManageAuthor extends Component {
   constructor(props) {
@@ -28,17 +48,30 @@ class ManageAuthor extends Component {
 
   updateAuthorState(event) {
     const { name, value } = event.target;
-    let { author } = this.state;
+    let { author, errors } = this.state;
     author = { ...author, [name]: value };
-    return this.setState({ author, isModified: true });
+    errors = { ...errors, [name]: [] };
+    return this.setState({ author, isModified: true, errors });
   }
 
   saveAuthorMethod(event) {
     event.preventDefault();
-    this.setState({ saving: true });
     const { saveAuthor, history } = this.props;
     const { author } = this.state;
+    const validators = validate(author, authorValidationConstraint);
+    if (validators) {
+      const keys = Object.keys(validators);
+      const errors = {};
+      for (const key of keys) { // eslint-disable-line
+        errors[key] = validators[key];
+      }
+      this.setState({
+        errors,
+      });
+      return;
+    }
 
+    this.setState({ saving: true });
     saveAuthor(author).then(() => {
       this.setState({ saving: false });
       toastr.success('Author saved');
