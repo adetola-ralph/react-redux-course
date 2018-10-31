@@ -149,7 +149,6 @@ ManageCoursePage.defaultProps = {
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(courseActions, dispatch),
-  // saveCourse: course => dispatch(courseActions.saveCourse(course)),
 });
 
 const mapStateToProps = (state, ownProps) => {

@@ -69,6 +69,7 @@ const mapStateToProps = (state) => {
   const { sort } = state;
   return {
     authors: authors.sort((a, b) => {
+      // TODO: have to find a better way of dealing with this (code duplication, fragile code)
       const { sortBy, sortOrder } = sort.author;
       if (sortOrder === 'desc') {
         return b[sortBy].localeCompare(a[sortBy]);

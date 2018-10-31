@@ -73,7 +73,7 @@ class ManageAuthor extends Component {
 
     this.setState({ saving: true });
     saveAuthor(author).then(() => {
-      this.setState({ saving: false });
+      this.setState({ saving: false, isModified: false });
       toastr.success('Author saved');
       history.push('/authors');
     }).catch((error) => {

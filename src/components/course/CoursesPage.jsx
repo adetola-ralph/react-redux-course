@@ -74,6 +74,7 @@ const mapStateToProps = (state) => {
   const { sort } = state;
   return {
     courses: courses.sort((a, b) => {
+      // TODO: have to find a better way of dealing with this (code duplication, fragile code)
       const { sortBy, sortOrder } = sort.course;
       if (sortOrder === 'desc') {
         return b[sortBy].localeCompare(a[sortBy]);
