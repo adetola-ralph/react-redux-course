@@ -16,5 +16,5 @@ React Redux challenges
 - [ ]  Handle non existent authors and courses
 - [x]  Number of courses in the header
 - [ ]  Pagination or infinite scrolling
-- [ ]  Sorting the table automatically
+- [x]  Sorting the table automatically
 - [ ]  Revert abandoned changes
