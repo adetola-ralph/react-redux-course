@@ -7,7 +7,12 @@ const AuthorListRow = ({ author }) => (
     <td><a href="/" target="_blank" rel="noreferrer noopener">View Profile</a></td>
     <td>
       <Link to={`/author/${author.id}`}>
-        {`${author.firstName} ${author.lastName}`}
+        {author.firstName}
+      </Link>
+    </td>
+    <td>
+      <Link to={`/author/${author.id}`}>
+        {author.lastName}
       </Link>
     </td>
   </tr>

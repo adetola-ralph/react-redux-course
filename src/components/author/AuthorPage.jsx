@@ -6,10 +6,21 @@ import PropTypes from 'prop-types';
 import AuthorList from './AuthorList';
 import EmptyList from '../common/EmptyList';
 
-const AuthorsPage = ({ authors, history }) => {
+// Actions
+import sortList from '../../actions/sortActions';
+
+const AuthorsPage = ({
+  authors, history, sortAuthor, sortOrder, sortBy,
+}) => {
   const redirectToAutorAddPage = () => {
     history.push('/author');
   };
+
+  const sort = (field) => {
+    const newSortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+    sortAuthor(field, newSortOrder);
+  };
+
 
   return (
     <div>
@@ -17,8 +28,21 @@ const AuthorsPage = ({ authors, history }) => {
       <button className="btn btn-primary" type="button" onClick={redirectToAutorAddPage}>Add Author</button>
       {
         authors.length > 0
-          ? <AuthorList authors={authors} />
-          : <EmptyList message="Nothing to see here, Add a new author" buttonAction={redirectToAutorAddPage} buttonMessage="Add a new Author" />
+          ? (
+            <AuthorList
+              authors={authors}
+              sort={sort}
+              sortOrder={sortOrder}
+              sortBy={sortBy}
+            />
+          )
+          : (
+            <EmptyList
+              message="Nothing to see here, Add a new author"
+              buttonAction={redirectToAutorAddPage}
+              buttonMessage="Add a new Author"
+            />
+          )
       }
     </div>
   );
@@ -33,10 +57,36 @@ AuthorsPage.propTypes = {
     }),
   ).isRequired,
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  sortAuthor: PropTypes.func.isRequired,
+  sortOrder: PropTypes.string.isRequired,
+  sortBy: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = state => ({
-  authors: state.authors,
+const mapStateToProps = (state) => {
+  // Had to do this because the system complained i was mutating redux state
+  // So I am creating a copy here rather that using destructuring
+  const authors = [...state.authors];
+  const { sort } = state;
+  return {
+    authors: authors.sort((a, b) => {
+      const { sortBy, sortOrder } = sort.author;
+      if (sortOrder === 'desc') {
+        return b[sortBy].localeCompare(a[sortBy]);
+      }
+
+      if (sortOrder === 'asc') {
+        return a[sortBy].localeCompare(b[sortBy]);
+      }
+
+      return 0;
+    }),
+    sortOrder: sort.author.sortOrder,
+    sortBy: sort.author.sortBy,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  sortAuthor: (sortBy, sortOrder) => dispatch(sortList(sortBy, sortOrder, 'author')),
 });
 
-export default connect(mapStateToProps)(AuthorsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthorsPage);
