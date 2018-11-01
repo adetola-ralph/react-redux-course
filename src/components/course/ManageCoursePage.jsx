@@ -78,19 +78,15 @@ class ManageCoursePage extends Component {
     const { actions, history } = this.props;
     const { course } = this.state;
     const validators = validate(course, courseValidationConstraint);
+
     if (validators) {
-      const keys = Object.keys(validators);
-      const errors = {};
-      for (const key of keys) { // eslint-disable-line
-        errors[key] = validators[key];
-      }
-      this.setState({
-        errors,
+      return this.setState({
+        errors: { ...validators },
       });
-      return;
     }
+
     this.setState({ saving: true });
-    actions.saveCourse(course).then(() => {
+    return actions.saveCourse(course).then(() => {
       this.setState({ saving: false, isModified: false });
       toastr.success('Course saved');
       history.push('/courses');

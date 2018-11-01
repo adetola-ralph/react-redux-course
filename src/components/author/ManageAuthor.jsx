@@ -59,20 +59,15 @@ class ManageAuthor extends Component {
     const { saveAuthor, history } = this.props;
     const { author } = this.state;
     const validators = validate(author, authorValidationConstraint);
+
     if (validators) {
-      const keys = Object.keys(validators);
-      const errors = {};
-      for (const key of keys) { // eslint-disable-line
-        errors[key] = validators[key];
-      }
-      this.setState({
-        errors,
+      return this.setState({
+        errors: { ...validators },
       });
-      return;
     }
 
     this.setState({ saving: true });
-    saveAuthor(author).then(() => {
+    return saveAuthor(author).then(() => {
       this.setState({ saving: false, isModified: false });
       toastr.success('Author saved');
       history.push('/authors');
