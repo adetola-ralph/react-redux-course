@@ -3,41 +3,30 @@ import PropTypes from 'prop-types';
 
 // Components
 import AuthorListRow from './AuthorListRow';
+import SortArrow from '../common/SortArrowComponent';
 
 const AuthorList = ({
   authors, sort, sortOrder, sortBy,
-}) => {
-  const sortArrowDisplay = (field) => {
-    if (sortBy === field) {
-      return sortOrder === 'desc'
-        ? <i className="glyphicon glyphicon-arrow-up" />
-        : <i className="glyphicon glyphicon-arrow-down" />;
-    }
-
-    return '';
-  };
-
-  return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th>&nbsp;</th>
-          <th onClick={() => sort('firstName')}>
+}) => (
+  <table className="table">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+        <th onClick={() => sort('firstName')}>
             First Name
-            {sortArrowDisplay('firstName')}
-          </th>
-          <th onClick={() => sort('lastName')}>
+          {<SortArrow display={sortBy === 'firstName'} order={sortOrder} />}
+        </th>
+        <th onClick={() => sort('lastName')}>
             Last Name
-            {sortArrowDisplay('lastName')}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {authors.map(author => <AuthorListRow key={author.id} author={author} />)}
-      </tbody>
-    </table>
-  );
-};
+          {<SortArrow display={sortBy === 'lastName'} order={sortOrder} />}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {authors.map(author => <AuthorListRow key={author.id} author={author} />)}
+    </tbody>
+  </table>
+);
 
 AuthorList.propTypes = {
   authors: PropTypes.arrayOf(

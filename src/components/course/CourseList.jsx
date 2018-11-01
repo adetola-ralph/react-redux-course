@@ -3,58 +3,47 @@ import PropTypes from 'prop-types';
 
 // Components
 import CourseListRow from './CourseListRow';
+import SortArrow from '../common/SortArrowComponent';
 
 const CourseList = ({
   courses, deleteCourse, sort, sortOrder, sortBy,
-}) => {
-  const sortArrowDisplay = (field) => {
-    if (sortBy === field) {
-      return sortOrder === 'desc'
-        ? <i className="glyphicon glyphicon-arrow-up" />
-        : <i className="glyphicon glyphicon-arrow-down" />;
-    }
-
-    return '';
-  };
-
-  return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th>&nbsp;</th>
-          <th onClick={() => sort('title')}>
+}) => (
+  <table className="table">
+    <thead>
+      <tr>
+        <th>&nbsp;</th>
+        <th onClick={() => sort('title')}>
           Title
-            {sortArrowDisplay('title')}
-          </th>
-          <th onClick={() => sort('authorId')}>
+          {<SortArrow display={sortBy === 'title'} order={sortOrder} />}
+        </th>
+        <th onClick={() => sort('authorId')}>
           Author
-            {sortArrowDisplay('authorId')}
-          </th>
-          <th onClick={() => sort('category')}>
+          {<SortArrow display={sortBy === 'authorId'} order={sortOrder} />}
+        </th>
+        <th onClick={() => sort('category')}>
           Category
-            {sortArrowDisplay('category')}
-          </th>
-          <th onClick={() => sort('length')}>
+          {<SortArrow display={sortBy === 'category'} order={sortOrder} />}
+        </th>
+        <th onClick={() => sort('length')}>
           Length
-            {sortArrowDisplay('length')}
-          </th>
-          <th />
-        </tr>
-      </thead>
-      <tbody>
-        {
-        courses.map(course => (
-          <CourseListRow
-            key={course.id}
-            course={course}
-            deleteCourse={deleteCourse}
-          />
-        ))
-      }
-      </tbody>
-    </table>
-  );
-};
+          {<SortArrow display={sortBy === 'length'} order={sortOrder} />}
+        </th>
+        <th />
+      </tr>
+    </thead>
+    <tbody>
+      {
+      courses.map(course => (
+        <CourseListRow
+          key={course.id}
+          course={course}
+          deleteCourse={deleteCourse}
+        />
+      ))
+    }
+    </tbody>
+  </table>
+);
 
 CourseList.propTypes = {
   courses: PropTypes.arrayOf(
