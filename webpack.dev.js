@@ -12,6 +12,7 @@ module.exports = merge(common, {
     hot: true,
     open: true,
     historyApiFallback: true,
+    disableHostCheck: true,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// Components
+import FormError from './FormError';
+
 const SelectInput = ({
   name, label, value, onChange, errors, defaultValue, options,
 }) => {
@@ -26,16 +29,7 @@ const SelectInput = ({
               </option>))
           }
         </select>
-        {
-        errors.length > 0
-        && (
-          errors.map(error => (
-            <div key={error} className="error-message">
-              {error}
-            </div>
-          ))
-        )
-      }
+        <FormError errors={errors} />
       </div>
     </div>
   );
