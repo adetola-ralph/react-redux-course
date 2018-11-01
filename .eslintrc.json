@@ -22,7 +22,8 @@
       "required": {
         "some": [ "nesting", "id"  ]
       }
-    }]
+    }],
+    "import/no-unresolved": "off"
   },
   "settings": {
     "import/resolver": {

@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// Components
+import FormError from './FormError';
+
 const TextInput = ({
   name, label, value, onChange, errors, placeholder,
 }) => {
@@ -21,16 +24,7 @@ const TextInput = ({
           value={value}
           onChange={onChange}
         />
-        {
-          errors.length > 0
-          && (
-            errors.map(error => (
-              <div key={error} className="error-message">
-                {error}
-              </div>
-            ))
-          )
-        }
+        <FormError errors={errors} />
       </div>
     </div>
   );
