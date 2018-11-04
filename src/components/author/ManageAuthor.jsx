@@ -115,7 +115,7 @@ ManageAuthor.defaultProps = {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const authorId = ownProps.match.params.id;
+  const { authorId } = ownProps;
   let author = {
     id: '', firstName: '', lastName: '',
   };

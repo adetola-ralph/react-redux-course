@@ -148,7 +148,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = (state, ownProps) => {
-  const courseId = ownProps.match.params.id;
+  const { courseId } = ownProps;
   let course = {
     id: '', watchHref: '', title: '', authorId: '', length: '', category: '',
   };
