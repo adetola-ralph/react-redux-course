@@ -16,7 +16,7 @@ const CourseListRow = ({ course, deleteCourse }) => {
       <td>{course.length}</td>
       <td>
         <button type="button" className="btn btn-xs btn-danger" onClick={onDelete}>
-          <i className="glyphicon glyphicon-trash" />
+          <i className="fas fa-trash-alt" />
         </button>
       </td>
     </tr>

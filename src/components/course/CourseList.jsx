@@ -8,8 +8,8 @@ import SortArrow from '../common/SortArrowComponent';
 const CourseList = ({
   courses, deleteCourse, sort, sortOrder, sortBy,
 }) => (
-  <table className="table">
-    <thead>
+  <table className="table table-hover table-bordered">
+    <thead className="thead-dark">
       <tr>
         <th>&nbsp;</th>
         <th onClick={() => sort('title')}>

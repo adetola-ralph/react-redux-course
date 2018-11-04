@@ -31,25 +31,27 @@ const CoursesPage = ({
     <div>
       <h1>Courses</h1>
       <button className="btn btn-primary" type="button" onClick={redirectToCourseAddPage}>Add Course</button>
-      {
-        courses.length > 0
-          ? (
-            <CourseList
-              courses={courses}
-              deleteCourse={deleteCourseMethod}
-              sort={sort}
-              sortOrder={sortOrder}
-              sortBy={sortBy}
-            />
-          )
-          : (
-            <EmptyList
-              message="Nothing to see here, Add a new course"
-              buttonAction={redirectToCourseAddPage}
-              buttonMessage="Add a new Course"
-            />
-          )
-      }
+      <div className="list-body">
+        {
+          courses.length > 0
+            ? (
+              <CourseList
+                courses={courses}
+                deleteCourse={deleteCourseMethod}
+                sort={sort}
+                sortOrder={sortOrder}
+                sortBy={sortBy}
+              />
+            )
+            : (
+              <EmptyList
+                message="Nothing to see here, Add a new course"
+                buttonAction={redirectToCourseAddPage}
+                buttonMessage="Add a new Course"
+              />
+            )
+        }
+      </div>
     </div>
   );
 };

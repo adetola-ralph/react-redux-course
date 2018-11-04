@@ -11,7 +11,7 @@ const EmptyList = ({ message, buttonMessage, buttonAction }) => {
           <path d="M50 50 L150 150" fill="transparent" stroke="#efefef" strokeWidth="5px" />
         </svg>
       </div>
-      <h3 className="text-center">
+      <h3 className="text-center message">
         {message}
       </h3>
       <button className="btn btn-primary center-block" onClick={onButtonCLick} type="button">{buttonMessage}</button>
