@@ -3,6 +3,8 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/adetola-ralph/react-redux-course/badge.svg)](https://coveralls.io/github/adetola-ralph/react-redux-course)
 
+[![Build Status](https://travis-ci.org/adetola-ralph/react-redux-course.svg?)](https://travis-ci.org/adetola-ralph/react-redux-course)
+
 ## Available processes
 > - Run `npm i` to install dependencies
 > - Run `npm start` to run the application in development mode
