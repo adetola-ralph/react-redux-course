@@ -9,7 +9,7 @@ const FormError = ({ errors }) => (
           {error}
         </div>
       ))
-    ) : ''
+    ) : null
 );
 
 FormError.propTypes = {
