@@ -1,6 +1,8 @@
 # Building applications with React and Redux in ES6 (Pluralsight course)
 [![CodeFactor](https://www.codefactor.io/repository/github/adetola-ralph/react-redux-course/badge)](https://www.codefactor.io/repository/github/adetola-ralph/react-redux-course)
 
+[![Coverage Status](https://coveralls.io/repos/github/adetola-ralph/react-redux-course/badge.svg)](https://coveralls.io/github/adetola-ralph/react-redux-course)
+
 ## Available processes
 > - Run `npm i` to install dependencies
 > - Run `npm start` to run the application in development mode
