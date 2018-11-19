@@ -11,6 +11,6 @@ module.exports = merge(common, {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new OptimizeCSSAssetsPlugin({}),
-    new CompressionPlugin({ deleteOriginalAssets: true }),
+    // new CompressionPlugin({ deleteOriginalAssets: true }),
   ],
 });
