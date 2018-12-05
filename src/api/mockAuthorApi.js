@@ -24,7 +24,7 @@ const authors = [
 // This would be performed on the server in a real app. Just stubbing in.
 const generateId = author => `${author.firstName.toLowerCase()}-${author.lastName.toLowerCase()}`;
 
-class AuthorApi {
+export class AuthorApi {
   static getAllAuthors() {
     return new Promise((resolve) => {
       setTimeout(() => {
