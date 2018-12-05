@@ -38,8 +38,8 @@ const App = ({ loading, numberOfCourses }) => (
         <Route exact path="/about" component={About} />
         <Route exact path="/courses" component={Courses} />
         <Route exact path="/authors" component={Authors} />
-        <Route exact path="/course/:id?" component={ManageCourse} />
-        <Route exact path="/author/:id?" component={ManageAuthor} />
+        <Route exact path="/course/:id?" render={({ match, history }) => <ManageCourse history={history} courseId={match.params.id} />} />
+        <Route exact path="/author/:id?" render={({ match, history }) => <ManageAuthor history={history} authorId={match.params.id} />} />
         <Route component={NotFoundComponent} />
       </Switch>
     </div>

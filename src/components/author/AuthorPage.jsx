@@ -26,24 +26,26 @@ const AuthorsPage = ({
     <div>
       <h1>Authors</h1>
       <button className="btn btn-primary" type="button" onClick={redirectToAutorAddPage}>Add Author</button>
-      {
-        authors.length > 0
-          ? (
-            <AuthorList
-              authors={authors}
-              sort={sort}
-              sortOrder={sortOrder}
-              sortBy={sortBy}
-            />
-          )
-          : (
-            <EmptyList
-              message="Nothing to see here, Add a new author"
-              buttonAction={redirectToAutorAddPage}
-              buttonMessage="Add a new Author"
-            />
-          )
-      }
+      <div className="list-body">
+        {
+          authors.length > 0
+            ? (
+              <AuthorList
+                authors={authors}
+                sort={sort}
+                sortOrder={sortOrder}
+                sortBy={sortBy}
+              />
+            )
+            : (
+              <EmptyList
+                message="Nothing to see here, Add a new author"
+                buttonAction={redirectToAutorAddPage}
+                buttonMessage="Add a new Author"
+              />
+            )
+        }
+      </div>
     </div>
   );
 };

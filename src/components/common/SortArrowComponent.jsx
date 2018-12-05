@@ -5,8 +5,8 @@ const SortArrowComponent = ({ display, order }) => {
   let element = '';
   if (display) {
     element = order === 'desc'
-      ? <i className="glyphicon glyphicon-arrow-up" />
-      : <i className="glyphicon glyphicon-arrow-down" />;
+      ? <i className="fas fa-arrow-up" />
+      : <i className="fas fa-arrow-down" />;
   }
   return element;
 };

@@ -13,6 +13,7 @@ import { loadCourses } from './actions/courseActions';
 import { loadAuthor } from './actions/authorActions';
 
 // Styles
+import '~/@fortawesome/fontawesome-free/css/all.css';
 import '~/bootstrap/dist/css/bootstrap.css';
 import '~/toastr/build/toastr.min.css';
 import './styles/styles.css';

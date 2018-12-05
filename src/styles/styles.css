@@ -27,3 +27,12 @@ nav {
 th {
   cursor: pointer;
 }
+
+.center-block {
+  margin: 0 auto;
+  display: block;
+}
+
+.list-body {
+  margin-top: 30px;
+}
