@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component Snapshot 1`] = `
+<nav>
+  <a
+    href="/"
+    onClick={[Function]}
+  >
+    Home
+  </a>
+  |
+  <a
+    href="/about"
+    onClick={[Function]}
+  >
+    About
+  </a>
+  |
+  <a
+    href="/courses"
+    onClick={[Function]}
+  >
+    Courses
+  </a>
+  |
+  <a
+    href="/authors"
+    onClick={[Function]}
+  >
+    Authors
+  </a>
+  |
+  <span>
+    Number of courses: 
+    0
+  </span>
+  <span>
+    <span
+      dots={20}
+      interval={100}
+    >
+      .
+       
+    </span>
+  </span>
+</nav>
+`;

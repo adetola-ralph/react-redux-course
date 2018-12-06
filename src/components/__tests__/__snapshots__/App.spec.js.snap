@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component Snapshot 1`] = `
+<div
+  className="container-fluid"
+>
+  <nav>
+    <a
+      href="/"
+      onClick={[Function]}
+    >
+      Home
+    </a>
+    |
+    <a
+      href="/about"
+      onClick={[Function]}
+    >
+      About
+    </a>
+    |
+    <a
+      href="/courses"
+      onClick={[Function]}
+    >
+      Courses
+    </a>
+    |
+    <a
+      href="/authors"
+      onClick={[Function]}
+    >
+      Authors
+    </a>
+    |
+    <span>
+      Number of courses: 
+      0
+    </span>
+    <span>
+      <span
+        dots={20}
+        interval={100}
+      >
+        .
+         
+      </span>
+    </span>
+  </nav>
+  <div
+    className="jumbotron"
+  >
+    <h1>
+      Pluralsight Administration
+    </h1>
+    <p>
+      React, Redux and React Router in ES6 for ultra responsive web apps.
+    </p>
+    <a
+      className="btn btn-primary btn-lg"
+      href="/about"
+      onClick={[Function]}
+    >
+      Learn More
+    </a>
+  </div>
+</div>
+`;
