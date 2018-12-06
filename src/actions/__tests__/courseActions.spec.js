@@ -163,10 +163,10 @@ describe('Course async actions', () => {
       ]);
     });
 
-    it.skip('should handle failed request', async () => {
-      CourseApi.deleteCourse = jest.fn(({}) => Promise.reject());
+    it('should handle failed request', async () => {
+      CourseApi.deleteCourse = jest.fn((courseId) => Promise.reject('Error'));
       try {
-        await store.dispatch(deleteCourse());
+        await store.dispatch(deleteCourse({ id: 3 }));
       } catch (err) {
         expect(store.getActions()).toEqual([
           {type: 'BEGIN_AJAX_CALL'},
