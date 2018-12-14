@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
 // App component
-import App from './components/App';
+import AppComponent from './components/App';
 
 // Store
 import configureStore from './store/configureStore';
@@ -24,6 +24,6 @@ store.dispatch(loadAuthor());
 
 render(
   <Provider store={store}>
-    <App />
+    <AppComponent />
   </Provider>, document.querySelector('#app'),
 );

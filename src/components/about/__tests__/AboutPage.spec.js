@@ -1,7 +1,8 @@
 import { create } from 'react-test-renderer';
-const { mount } = Enzyme;
 
 import AboutPage from '../AboutPage';
+
+const { mount } = Enzyme;
 
 let wrapper;
 

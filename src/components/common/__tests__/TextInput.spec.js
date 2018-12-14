@@ -1,8 +1,8 @@
-const { mount, shallow } = Enzyme;
 
 import TextInput from '../TextInput';
 
-const onChangeMock = jest.fn((e) => e.value);
+const { mount } = Enzyme;
+const onChangeMock = jest.fn(e => e.value);
 
 const defaultProps = {
   name: 'Name',
@@ -11,7 +11,7 @@ const defaultProps = {
   placeholder: '',
   onChange: onChangeMock,
   errors: [],
-}
+};
 
 describe('Text input component', () => {
   it('should render an input field', () => {
@@ -36,7 +36,7 @@ describe('Text input component', () => {
   });
 
   it('should call function on input field change', () => {
-    const wrapper = mount(<TextInput {...defaultProps} placeholder="placeholder"/>);
+    const wrapper = mount(<TextInput {...defaultProps} placeholder="placeholder" />);
 
     const inputField = wrapper.find('input');
     inputField.simulate('change', { value: 'Oreofe' });

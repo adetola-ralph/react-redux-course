@@ -1,15 +1,17 @@
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 
-import { createAuthorSuccess, loadAuthorsSuccess, loadAuthor, saveAuthor } from '../authorActions';
-import { LOAD_AUTHORS_SUCCESS, CREATE_AUTHOR_SUCCESS, UPDATE_AUTHOR_SUCCESS } from '../actionTypes';
+import { AuthorApi } from '../../api/mockAuthorApi';
+import { LOAD_AUTHORS_SUCCESS, CREATE_AUTHOR_SUCCESS } from '../actionTypes';
+import {
+  createAuthorSuccess, loadAuthorsSuccess, loadAuthor, saveAuthor,
+} from '../authorActions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 const store = mockStore({ authors: [], ajaxCallsInProgress: 0 });
 
-import { AuthorApi } from '../../api/mockAuthorApi';
 
 describe('Author action creation', () => {
   it('should create action for load author success', () => {
@@ -38,20 +40,20 @@ describe('Author async actions', () => {
     });
 
     it('should create LOAD_AUTHORS_SUCCESS & BEGIN_AJAX_CALL', async () => {
-      await store.dispatch(loadAuthor())
+      await store.dispatch(loadAuthor());
       expect(store.getActions()).toEqual([
         {
-          type: 'BEGIN_AJAX_CALL'
+          type: 'BEGIN_AJAX_CALL',
         },
         {
           authors: [
             {
               id: 3,
-              name: 'Oreofe Olutola'
-            }
+              name: 'Oreofe Olutola',
+            },
           ],
-          type: 'LOAD_AUTHORS_SUCCESS'
-        }
+          type: 'LOAD_AUTHORS_SUCCESS',
+        },
       ]);
     });
 
@@ -61,8 +63,8 @@ describe('Author async actions', () => {
         await store.dispatch(loadAuthor());
       } catch (err) {
         expect(store.getActions()).toEqual([
-          {type: 'BEGIN_AJAX_CALL'},
-          {type: 'AJAX_CALL_ERROR'},
+          { type: 'BEGIN_AJAX_CALL' },
+          { type: 'AJAX_CALL_ERROR' },
         ]);
       }
     });
@@ -73,9 +75,8 @@ describe('Author async actions', () => {
       AuthorApi.saveAuthor = jest.fn((author) => {
         if (author.id) {
           return Promise.resolve({ ...author });
-        } else {
-          return Promise.resolve({ id: 3, ...author });
         }
+        return Promise.resolve({ id: 3, ...author });
       });
     });
 
@@ -87,15 +88,15 @@ describe('Author async actions', () => {
       await store.dispatch(saveAuthor({ name: 'Oreofe Olutola' }));
       expect(store.getActions()).toEqual([
         {
-          type: 'BEGIN_AJAX_CALL'
+          type: 'BEGIN_AJAX_CALL',
         },
         {
           author: {
             id: 3,
-            name: 'Oreofe Olutola'
+            name: 'Oreofe Olutola',
           },
-          type: 'CREATE_AUTHOR_SUCCESS'
-        }
+          type: 'CREATE_AUTHOR_SUCCESS',
+        },
       ]);
     });
 
@@ -103,15 +104,15 @@ describe('Author async actions', () => {
       await store.dispatch(saveAuthor({ id: 5, name: 'Oreofe Olutola' }));
       expect(store.getActions()).toEqual([
         {
-          type: 'BEGIN_AJAX_CALL'
+          type: 'BEGIN_AJAX_CALL',
         },
         {
           author: {
             id: 5,
-            name: 'Oreofe Olutola'
+            name: 'Oreofe Olutola',
           },
-          type: 'UPDATE_AUTHOR_SUCCESS'
-        }
+          type: 'UPDATE_AUTHOR_SUCCESS',
+        },
       ]);
     });
 
@@ -121,8 +122,8 @@ describe('Author async actions', () => {
         await store.dispatch(saveAuthor());
       } catch (err) {
         expect(store.getActions()).toEqual([
-          {type: 'BEGIN_AJAX_CALL'},
-          {type: 'AJAX_CALL_ERROR'},
+          { type: 'BEGIN_AJAX_CALL' },
+          { type: 'AJAX_CALL_ERROR' },
         ]);
       }
     });

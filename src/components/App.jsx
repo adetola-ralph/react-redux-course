@@ -9,7 +9,7 @@ import Home from './home/HomePage';
 import About from './about/AboutPage';
 import Authors from './author/AuthorPage';
 import Courses from './course/CoursesPage';
-import ManageAuthor from './author/ManageAuthor';
+import ManageAuthorPage from './author/ManageAuthor';
 import ManageCourse from './course/ManageCoursePage';
 import EmptyList from './common/EmptyList';
 
@@ -39,7 +39,7 @@ export const App = ({ loading, numberOfCourses }) => (
         <Route exact path="/courses" component={Courses} />
         <Route exact path="/authors" component={Authors} />
         <Route exact path="/course/:id?" render={({ match, history }) => <ManageCourse history={history} courseId={match.params.id} />} />
-        <Route exact path="/author/:id?" render={({ match, history }) => <ManageAuthor history={history} authorId={match.params.id} />} />
+        <Route exact path="/author/:id?" render={({ match, history }) => <ManageAuthorPage history={history} authorId={match.params.id} />} />
         <Route component={NotFoundComponent} />
       </Switch>
     </div>

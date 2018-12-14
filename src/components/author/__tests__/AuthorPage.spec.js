@@ -1,6 +1,5 @@
 import thunk from 'redux-thunk';
-import { mount, shallow } from 'enzyme';
-import { MemoryRouter } from 'react-router-dom';
+import { shallow } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 
 import AuthorPageComponent, { AuthorsPage } from '../AuthorPage';
@@ -9,7 +8,7 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 
-let sortAuthor = jest.fn((arg1, arg2) => {});
+const sortAuthor = jest.fn(() => {});
 const push = jest.fn();
 let wrapper;
 let store;
@@ -25,7 +24,7 @@ const props = {
       firstName: 'Jane',
       lastName: 'Doe',
       id: '2',
-    }
+    },
   ],
   sortAuthor,
   sortOrder: 'asc',
@@ -92,7 +91,9 @@ describe('AuthorPageComponent redux connection', () => {
     wrapper.props().sortAuthor('asc', 'firstName');
 
     const actions = store.getActions();
-    expect(actions).toEqual([{list: 'author', sortBy: 'asc', sortOrder: 'firstName', type: 'SORT'}]);
+    expect(actions).toEqual([{
+      list: 'author', sortBy: 'asc', sortOrder: 'firstName', type: 'SORT',
+    }]);
   });
 
   test('map state to props sort in asc order', () => {
@@ -133,7 +134,7 @@ describe('AuthorPageComponent redux connection', () => {
 
     });
 
-    const element  = shallow(<AuthorPageComponent store={newStore} />);
+    const element = shallow(<AuthorPageComponent store={newStore} />);
     expect(element.props().authors).toEqual([
       {
         id: '2',

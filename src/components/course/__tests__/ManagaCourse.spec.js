@@ -1,6 +1,5 @@
 import thunk from 'redux-thunk';
-import { mount, shallow } from 'enzyme';
-import { MemoryRouter } from 'react-router-dom';
+import { shallow } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 
 import { CourseApi } from '../../../api/mockCourseApi';
@@ -9,9 +8,9 @@ import ManageCourseComponent, { ManageCoursePage } from '../ManageCoursePage';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-CourseApi.saveCourse = jest.fn((course) =>  Promise.resolve(course));
+CourseApi.saveCourse = jest.fn(course => Promise.resolve(course));
 
-let saveCourse = jest.fn((arg) => Promise.resolve(arg));
+const saveCourse = jest.fn(arg => Promise.resolve(arg));
 const push = jest.fn();
 let wrapper;
 let store;
@@ -110,28 +109,28 @@ describe('Manage Course component', () => {
 describe('ManageCourseComponent redux connection', () => {
   beforeEach(() => {
     const initialState = {
-        courses: [
-          {
-            title: 'Title2',
-            watchHref: 'http://web.info',
-            authorId: '2',
-            length: '10:10',
-            category: 'programming science',
-            id: '2',
-          },
-        ],
-        authors: [
-          {
-            id: '2',
-            firstName: 'Jane',
-            lastName: 'Doe',
-          },
-        ],
+      courses: [
+        {
+          title: 'Title2',
+          watchHref: 'http://web.info',
+          authorId: '2',
+          length: '10:10',
+          category: 'programming science',
+          id: '2',
+        },
+      ],
+      authors: [
+        {
+          id: '2',
+          firstName: 'Jane',
+          lastName: 'Doe',
+        },
+      ],
     };
     store = mockStore(initialState);
     // Shallow render the container passing in the mock store
     wrapper = shallow(
-      <ManageCourseComponent store={store} courseId={'2'} />
+      <ManageCourseComponent store={store} courseId="2" />,
     );
   });
 
@@ -148,8 +147,8 @@ describe('ManageCourseComponent redux connection', () => {
         { type: 'BEGIN_AJAX_CALL' },
         {
           author: { id: '1' },
-          type: 'UPDATE_AUTHOR_SUCCESS'
-        }
+          type: 'UPDATE_AUTHOR_SUCCESS',
+        },
       ]);
       done();
     });
@@ -173,7 +172,7 @@ describe('ManageCourseComponent redux connection', () => {
 
   test('map state to props for non existent authorid', () => {
     wrapper = shallow(
-      <ManageCourseComponent store={store} />
+      <ManageCourseComponent store={store} />,
     );
 
     expect(wrapper.props().course).toEqual({

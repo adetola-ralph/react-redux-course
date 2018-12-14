@@ -1,8 +1,8 @@
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import AuthorList from '../AuthorList';
 
-const sortFn = jest.fn((arg) => arg);
+const sortFn = jest.fn(arg => arg);
 let table;
 let thead;
 let tbody;
@@ -22,8 +22,8 @@ const props = {
       firstName: 'Jane',
       lastName: 'Doe',
       id: '2',
-    }
-  ]
+    },
+  ],
 };
 
 describe('Author Lost component', () => {

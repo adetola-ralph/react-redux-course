@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import CourseListRow from '../CourseListRow';
 
-const deleteCourse = jest.fn((arg) => arg);
+const deleteCourse = jest.fn(arg => arg);
 let wrapper;
 let tr;
 
@@ -28,7 +28,7 @@ describe('Course List Row component', () => {
             <CourseListRow {...props} />
           </tbody>
         </table>
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     tr = wrapper.find('tr');
@@ -57,6 +57,6 @@ describe('Course List Row component', () => {
       length: '5:08',
       category: 'programming',
       id: '1',
-    })
+    });
   });
 });

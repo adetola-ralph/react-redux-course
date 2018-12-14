@@ -8,11 +8,11 @@ import CoursesPageComponent, { CoursesPage } from '../CoursesPage';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-CourseApi.deleteCourse = jest.fn((courseId) =>  Promise.resolve());
+CourseApi.deleteCourse = jest.fn(() => Promise.resolve());
 
 
-let sortCourse = jest.fn((arg1, arg2) => {});
-let deleteCourse = jest.fn((course) => {});
+const sortCourse = jest.fn(() => {});
+const deleteCourse = jest.fn(() => {});
 const push = jest.fn();
 let wrapper;
 let store;
@@ -34,7 +34,7 @@ const props = {
       length: '10:10',
       category: 'programming science',
       id: '2',
-    }
+    },
   ],
   sortCourse,
   deleteCourse,
@@ -92,7 +92,7 @@ describe('CoursesPageComponent redux connection', () => {
           length: '10:10',
           category: 'programming science',
           id: '2',
-        }
+        },
       ],
     };
     store = mockStore(initialState);
@@ -107,7 +107,9 @@ describe('CoursesPageComponent redux connection', () => {
     wrapper.props().sortCourse('asc', 'title');
 
     const actions = store.getActions();
-    expect(actions).toEqual([{list: 'course', sortBy: 'asc', sortOrder: 'title', type: 'SORT'}]);
+    expect(actions).toEqual([{
+      list: 'course', sortBy: 'asc', sortOrder: 'title', type: 'SORT',
+    }]);
   });
 
   test('map dispatch to props deleteCourse', (done) => {
@@ -115,9 +117,9 @@ describe('CoursesPageComponent redux connection', () => {
 
     setImmediate(() => {
       const actions = store.getActions();
-      expect(actions).toEqual([{type: 'BEGIN_AJAX_CALL'}, {course: {id: '2'}, type: 'DELETE_COURSE_SUCCESS'}]);
+      expect(actions).toEqual([{ type: 'BEGIN_AJAX_CALL' }, { course: { id: '2' }, type: 'DELETE_COURSE_SUCCESS' }]);
       done();
-    })
+    });
   });
 
   test('map state to props sort in asc order', () => {
@@ -159,7 +161,7 @@ describe('CoursesPageComponent redux connection', () => {
           length: '10:10',
           category: 'programming science',
           id: '2',
-        }
+        },
       ],
       sort: {
         course: {
@@ -170,7 +172,7 @@ describe('CoursesPageComponent redux connection', () => {
 
     });
 
-    const element  = shallow(<CoursesPageComponent store={newStore} />);
+    const element = shallow(<CoursesPageComponent store={newStore} />);
     expect(element.props().courses).toEqual([
       {
         title: 'Title',
@@ -187,7 +189,7 @@ describe('CoursesPageComponent redux connection', () => {
         length: '10:10',
         category: 'programming science',
         id: '2',
-      }
+      },
     ]);
   });
 });

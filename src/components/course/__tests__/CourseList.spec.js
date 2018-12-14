@@ -1,9 +1,9 @@
-import { shallow, mount } from 'enzyme';
-
+import { shallow } from 'enzyme';
 import CourseList from '../CourseList';
 
-const sortFn = jest.fn((arg) => arg);
-const deleteCourse = jest.fn((arg) => arg);
+
+const sortFn = jest.fn(arg => arg);
+const deleteCourse = jest.fn(arg => arg);
 let table;
 let thead;
 let tbody;
@@ -30,8 +30,8 @@ const props = {
       length: '10:10',
       category: 'programming science',
       id: '2',
-    }
-  ]
+    },
+  ],
 };
 
 describe('Author Lost component', () => {

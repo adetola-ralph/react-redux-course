@@ -16,12 +16,12 @@ import {
   deleteCourse,
 } from '../courseActions';
 
+import { CourseApi } from '../../api/mockCourseApi';
+
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 const store = mockStore({ courses: [], ajaxCallsInProgress: 0 });
-
-import { CourseApi } from '../../api/mockCourseApi';
 
 describe('Course action creator', () => {
   it('should create action for load course success', () => {
@@ -67,18 +67,18 @@ describe('Course async actions', () => {
     });
 
     it('should create LOAD_COURSES_SUCCESS & BEGIN_AJAX_CALL', async () => {
-      await store.dispatch(loadCourses())
+      await store.dispatch(loadCourses());
       expect(store.getActions()).toEqual([
         {
-          type: 'BEGIN_AJAX_CALL'
+          type: 'BEGIN_AJAX_CALL',
         },
         {
           courses: [
             { id: 3, name: 'Starting Javascript' },
             { id: 2, name: 'HTML for noobs' },
           ],
-          type: 'LOAD_COURSES_SUCCESS'
-        }
+          type: 'LOAD_COURSES_SUCCESS',
+        },
       ]);
     });
 
@@ -88,8 +88,8 @@ describe('Course async actions', () => {
         await store.dispatch(loadCourses());
       } catch (err) {
         expect(store.getActions()).toEqual([
-          {type: 'BEGIN_AJAX_CALL'},
-          {type: 'AJAX_CALL_ERROR'},
+          { type: 'BEGIN_AJAX_CALL' },
+          { type: 'AJAX_CALL_ERROR' },
         ]);
       }
     });
@@ -100,10 +100,9 @@ describe('Course async actions', () => {
       CourseApi.saveCourse = jest.fn((course) => {
         if (course.id) {
           return Promise.resolve({ ...course });
-        } else {
-          // give an arbitrary id
-          return Promise.resolve({ id: 6, ...course });
         }
+        // give an arbitrary id
+        return Promise.resolve({ id: 6, ...course });
       });
     });
 
@@ -123,7 +122,7 @@ describe('Course async actions', () => {
       await store.dispatch(saveCourse({ id: 55, name: 'Becoming a CSS Ninja' }));
       expect(store.getActions()).toEqual([
         { type: 'BEGIN_AJAX_CALL' },
-        { course: { id: 55, name: 'Becoming a CSS Ninja' }, type: 'UPDATE_COURSE_SUCCESS' }
+        { course: { id: 55, name: 'Becoming a CSS Ninja' }, type: 'UPDATE_COURSE_SUCCESS' },
       ]);
     });
 
@@ -133,8 +132,8 @@ describe('Course async actions', () => {
         await store.dispatch(saveCourse());
       } catch (err) {
         expect(store.getActions()).toEqual([
-          {type: 'BEGIN_AJAX_CALL'},
-          {type: 'AJAX_CALL_ERROR'},
+          { type: 'BEGIN_AJAX_CALL' },
+          { type: 'AJAX_CALL_ERROR' },
         ]);
       }
     });
@@ -142,7 +141,7 @@ describe('Course async actions', () => {
 
   describe('deleteCourse action', () => {
     beforeEach(() => {
-      CourseApi.deleteCourse = jest.fn((courseId) => Promise.resolve());
+      CourseApi.deleteCourse = jest.fn(() => Promise.resolve());
     });
 
     afterEach(() => {
@@ -156,21 +155,21 @@ describe('Course async actions', () => {
         {
           course: {
             id: 3,
-            name: 'Test like Kent C. Dodds (Shallow rendering is eveil)'
+            name: 'Test like Kent C. Dodds (Shallow rendering is eveil)',
           },
-          type: 'DELETE_COURSE_SUCCESS'
-        }
+          type: 'DELETE_COURSE_SUCCESS',
+        },
       ]);
     });
 
     it('should handle failed request', async () => {
-      CourseApi.deleteCourse = jest.fn((courseId) => Promise.reject('Error'));
+      CourseApi.deleteCourse = jest.fn(() => Promise.reject('Error'));
       try {
         await store.dispatch(deleteCourse({ id: 3 }));
       } catch (err) {
         expect(store.getActions()).toEqual([
-          {type: 'BEGIN_AJAX_CALL'},
-          {type: 'AJAX_CALL_ERROR'},
+          { type: 'BEGIN_AJAX_CALL' },
+          { type: 'AJAX_CALL_ERROR' },
         ]);
       }
     });

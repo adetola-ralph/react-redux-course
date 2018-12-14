@@ -1,12 +1,10 @@
 import configureStore from '../configureStore';
+import rootReducer from '../../reducers';
 
 jest.mock('../../reducers');
-import rootReducer from '../../reducers';
-rootReducer.mockImplementation(() => {
-  return {
-    course: {},
-  };
-});
+rootReducer.mockImplementation(() => ({
+  course: {},
+}));
 
 describe('Configure store', () => {
   test('store creation', () => {

@@ -21,7 +21,7 @@ describe('Author List Row component', () => {
             <AuthorListRow {...props} />
           </tbody>
         </table>
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     const tr = wrapper.find('tr');

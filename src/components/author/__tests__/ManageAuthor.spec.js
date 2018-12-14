@@ -1,6 +1,5 @@
 import thunk from 'redux-thunk';
-import { mount, shallow } from 'enzyme';
-import { MemoryRouter } from 'react-router-dom';
+import { shallow } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 
 import { AuthorApi } from '../../../api/mockAuthorApi';
@@ -9,9 +8,9 @@ import ManageAuthorComponent, { ManageAuthor } from '../ManageAuthor';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-AuthorApi.saveAuthor = jest.fn((author) =>  Promise.resolve(author));
+AuthorApi.saveAuthor = jest.fn(author => Promise.resolve(author));
 
-let saveAuthor = jest.fn((arg) => Promise.resolve(arg));
+let saveAuthor = jest.fn(arg => Promise.resolve(arg));
 const push = jest.fn();
 let wrapper;
 let store;
@@ -100,18 +99,18 @@ describe('Manage Author component', () => {
 describe('ManageAuthorComponent redux connection', () => {
   beforeEach(() => {
     const initialState = {
-        authors: [
-          {
-            firstName: 'John',
-            lastName: 'Doe',
-            id: '1',
-          },
-        ],
+      authors: [
+        {
+          firstName: 'John',
+          lastName: 'Doe',
+          id: '1',
+        },
+      ],
     };
     store = mockStore(initialState);
     // Shallow render the container passing in the mock store
     wrapper = shallow(
-      <ManageAuthorComponent store={store} authorId={'1'} />
+      <ManageAuthorComponent store={store} authorId="1" />,
     );
   });
 
@@ -128,8 +127,8 @@ describe('ManageAuthorComponent redux connection', () => {
         { type: 'BEGIN_AJAX_CALL' },
         {
           author: { id: '1' },
-          type: 'UPDATE_AUTHOR_SUCCESS'
-        }
+          type: 'UPDATE_AUTHOR_SUCCESS',
+        },
       ]);
       done();
     });
@@ -145,7 +144,7 @@ describe('ManageAuthorComponent redux connection', () => {
 
   test('map state to props for non existent authorid', () => {
     wrapper = shallow(
-      <ManageAuthorComponent store={store} />
+      <ManageAuthorComponent store={store} />,
     );
 
     expect(wrapper.props().author).toEqual({

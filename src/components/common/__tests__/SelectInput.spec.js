@@ -1,8 +1,8 @@
-const { mount, shallow } = Enzyme;
-
 import SelectInput from '../SelectInput';
 
-const onChangeMock = jest.fn((e) => e.value);
+const { mount } = Enzyme;
+
+const onChangeMock = jest.fn(e => e.value);
 
 const defaultProps = {
   name: 'Select',
