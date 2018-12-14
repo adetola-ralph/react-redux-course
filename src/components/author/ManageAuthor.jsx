@@ -30,7 +30,7 @@ const authorValidationConstraint = {
   },
 };
 
-class ManageAuthor extends Component {
+export class ManageAuthor extends Component {
   constructor(props) {
     super(props);
     const { author } = props;

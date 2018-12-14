@@ -9,10 +9,10 @@ import EmptyList from '../common/EmptyList';
 // Actions
 import sortList from '../../actions/sortActions';
 
-const AuthorsPage = ({
+export const AuthorsPage = ({
   authors, history, sortAuthor, sortOrder, sortBy,
 }) => {
-  const redirectToAutorAddPage = () => {
+  const redirectToAuthorAddPage = () => {
     history.push('/author');
   };
 
@@ -25,7 +25,7 @@ const AuthorsPage = ({
   return (
     <div>
       <h1>Authors</h1>
-      <button className="btn btn-primary" type="button" onClick={redirectToAutorAddPage}>Add Author</button>
+      <button className="btn btn-primary" type="button" onClick={redirectToAuthorAddPage}>Add Author</button>
       <div className="list-body">
         {
           authors.length > 0
@@ -40,7 +40,7 @@ const AuthorsPage = ({
             : (
               <EmptyList
                 message="Nothing to see here, Add a new author"
-                buttonAction={redirectToAutorAddPage}
+                buttonAction={redirectToAuthorAddPage}
                 buttonMessage="Add a new Author"
               />
             )
