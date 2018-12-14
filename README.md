@@ -1,6 +1,6 @@
 # Building applications with React and Redux in ES6 (Pluralsight course)
 [![CodeFactor](https://www.codefactor.io/repository/github/adetola-ralph/react-redux-course/badge)](https://www.codefactor.io/repository/github/adetola-ralph/react-redux-course)
-
+[![Coverage Status](https://coveralls.io/repos/github/adetola-ralph/react-redux-course/badge.svg?branch=master)](https://coveralls.io/github/adetola-ralph/react-redux-course?branch=master)
 [![Build Status](https://travis-ci.org/adetola-ralph/react-redux-course.svg?)](https://travis-ci.org/adetola-ralph/react-redux-course)
 
 ## Available processes
