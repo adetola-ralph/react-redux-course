@@ -29,7 +29,7 @@ NotFoundComponent.propTypes = {
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-const App = ({ loading, numberOfCourses }) => (
+export const App = ({ loading, numberOfCourses }) => (
   <Router history={customHistory}>
     <div className="container-fluid">
       <Header loading={loading} numberOfCourses={numberOfCourses} />

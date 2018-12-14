@@ -29,6 +29,7 @@ export const loadCourses = () => (dispatch) => {
   courseApi.getAllCourses().then((courses) => {
     dispatch(loadCoursesSuccess(courses));
   }).catch((error) => {
+    dispatch(ajaxCallError());
     throw error;
   });
 };

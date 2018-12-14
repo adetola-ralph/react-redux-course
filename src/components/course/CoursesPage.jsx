@@ -11,7 +11,7 @@ import EmptyList from '../common/EmptyList';
 import sortList from '../../actions/sortActions';
 import { deleteCourse as deleteCourseAction } from '../../actions/courseActions';
 
-const CoursesPage = ({
+export const CoursesPage = ({
   courses, history, deleteCourse, sortCourse, sortOrder, sortBy,
 }) => {
   const redirectToCourseAddPage = () => {
